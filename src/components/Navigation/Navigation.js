@@ -1,11 +1,28 @@
 import React from 'react';
 import ProfileIcon from '../Profile/ProfileIcon'
+import Modal from '@material-ui/core/Modal'
+import Profile from '../Profile/Profile'
 
-const Navigation = ({ onRouteChange, isSignedIn }) => {
-    if (isSignedIn) {
+const Navigation = ({ onRouteChange, isSignedIn, user }) => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleModalOpen = () => {
+    setOpen(true);
+  }
+
+  const handleModalClose = () => {
+    setOpen(false)
+  }
+  
+  if (isSignedIn) {
       return (
         <nav style={{display: 'flex', justifyContent: 'flex-end'}}>
-          <ProfileIcon clickProfile='1' clickLogout={()=>onRouteChange('signout')}/>
+          <ProfileIcon clickProfile = {handleModalOpen} clickLogout={()=>onRouteChange('signout')}/>
+          <Modal
+            open={open}
+          >
+            <Profile user={user} modalClose={handleModalClose}/>
+          </Modal>
         </nav>
       );
     } else {

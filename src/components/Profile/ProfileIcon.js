@@ -6,14 +6,14 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
 
-export default function ProfileIcon({clickLogout}) {
+export default function ProfileIcon({clickLogout, clickProfile}) {
     const [anchorEl, setAnchorEl] = React.useState(null); //A way of using state inside of a functional component.
 
-    const handleClick = (event) =>{
+    const handleClickAvatar = (event) =>{
         setAnchorEl(event.target);
     }
 
-    const handleClose = () => {
+    const handleCloseMenu = () => {
         setAnchorEl(null)
     }
 
@@ -28,18 +28,18 @@ export default function ProfileIcon({clickLogout}) {
 
     return (
         <div>
-            <Avatar className={classes.root} onClick={handleClick} src={require("./testimage.PNG")}/>
+            <Avatar className={classes.root} onClick={handleClickAvatar} src={require("./testimage.PNG")}/>
             <Menu
                 id="simple-menu"
                 anchorEl={anchorEl}
                 keepMounted
                 open={Boolean(anchorEl)}
-                onClose={handleClose}
+                onClose={handleCloseMenu}
                 getContentAnchorEl={null}
                 anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                 transformOrigin={{ vertical: "top", horizontal: "center" }}
             >
-                <MenuItem>Profile</MenuItem>
+                <MenuItem onClick={clickProfile}>Profile</MenuItem>
                 <MenuItem onClick={clickLogout}>Log Out</MenuItem> 
             </Menu>
         </div>
