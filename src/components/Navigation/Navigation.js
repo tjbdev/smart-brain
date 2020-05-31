@@ -3,7 +3,7 @@ import ProfileIcon from '../Profile/ProfileIcon'
 import Modal from '@material-ui/core/Modal'
 import Profile from '../Profile/Profile'
 
-const Navigation = ({ onRouteChange, isSignedIn, user }) => {
+const Navigation = ({ onRouteChange, isSignedIn, user, loadUser }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleModalOpen = () => {
@@ -21,7 +21,7 @@ const Navigation = ({ onRouteChange, isSignedIn, user }) => {
           <Modal
             open={open}
           >
-            <Profile user={user} modalClose={handleModalClose}/>
+            <Profile user={user} modalClose={handleModalClose} loadUser={loadUser}/>
           </Modal>
         </nav>
       );

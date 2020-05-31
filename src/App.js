@@ -32,7 +32,9 @@ const initialState = {
     name: '',
     email: '',
     entries: 0,
-    joined: ''
+    joined: '',
+    pet: '',
+    age:0
   }
 }
 
@@ -48,7 +50,9 @@ class App extends Component {
       name: data.name,
       email: data.email,
       entries: data.entries,
-      joined: data.joined
+      joined: data.joined,
+      pet: data.pet,
+      age: data.age
     }})
   }
 
@@ -110,6 +114,16 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
+  handleUpdateProfileInfo = (name,age,pet) =>{
+    this.setState( prevState => ({
+      ...prevState,
+      name,
+      age,
+      pet
+    })
+    );
+  }
+
   onRouteChange = (route) => {
     if (route === 'signout') {
       this.setState(initialState)
@@ -126,7 +140,7 @@ class App extends Component {
          <Particles className='particles'
           params={particlesOptions}
         />
-        <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} user={this.state.user} />
+        <Navigation loadUser={this.loadUser} isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} user={this.state.user} />
         { route === 'home'
           ? <div>
               <Logo />
