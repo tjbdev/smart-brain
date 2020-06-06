@@ -9,9 +9,12 @@ export default function Profile({user, modalClose, loadUser}) {
     const [sPet, setSPet] = React.useState(pet);
 
     const handleClickSave = () =>{
-        fetch('http://localhost:3000/profile/'+user.id, {
+        fetch('http://localhost:3000/profile/update/'+user.id, {
             method: 'post',
-            headers: {'Content-Type':'application/json'},
+            headers: {
+                'Content-Type':'application/json',
+                'authorization': 'Bearer '+ window.sessionStorage.getItem('token')
+            },
             body:JSON.stringify({
                 name: sName,
                 age: sAge,
